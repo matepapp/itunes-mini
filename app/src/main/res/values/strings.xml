@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">iTunesMini</string>
     <string name="action_settings">Settings</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="new_search">New search</string>
+    <string name="expression">Expression</string>
+    <string name="type">Type</string>
+    <string name="results_count">Results count</string>
+    <string name="search">Search</string>
+    <string name="back">Back</string>
+    <string name="results">Results</string>
 </resources>
