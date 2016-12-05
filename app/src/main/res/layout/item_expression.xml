@@ -20,11 +20,16 @@
         android:id="@+id/ExpressionItemEditButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/edit" />
+        android:text="@string/edit"
+        android:theme="@style/FlatButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        />
 
     <Button
         android:id="@+id/ExpressionItemDeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/delete" />
+        android:text="@string/delete"
+        android:theme="@style/FlatButton"
+        style="@style/Widget.AppCompat.Button.Borderless"/>
 </LinearLayout>
