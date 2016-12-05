@@ -36,7 +36,7 @@ public class ExpressionAdapter extends RecyclerView.Adapter<ExpressionAdapter.Ex
     @Override
     public void onBindViewHolder(ExpressionViewHolder holder, int position) {
         holder.position = position;
-        holder.nameTextView.setText(cities.get(position));
+        holder.nameTextView.setText(expressions.get(position));
     }
 
     @Override
@@ -61,13 +61,13 @@ public class ExpressionAdapter extends RecyclerView.Adapter<ExpressionAdapter.Ex
         int position;
         TextView nameTextView;
         Button editButton;
-        Button removeButton;
+        Button deleteButton;
 
         public ExpressionViewHolder(View itemView) {
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(
                             R.id.ExpressionItemNameTextView);
-            removeButton = (Button) itemView.findViewById(R.id.ExpressionItemRemoveButton);
+            deleteButton = (Button) itemView.findViewById(R.id.ExpressionItemDeleteButton);
             editButton = (Button) itemView.findViewById(R.id.ExpressionItemEditButton);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
