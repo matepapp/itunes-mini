@@ -41,19 +41,31 @@
 
         <Button
             android:id="@+id/Plus"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_gravity="right"
-            android:text="+" />
+            android:theme="@style/FlatButton"
+            android:text="+"
+            style="@style/Widget.AppCompat.Button.Borderless" />
 
         <Button
             android:id="@+id/Minus"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_gravity="right"
-            android:text="-" />
-
+            android:theme="@style/FlatButton"
+            android:text="-"
+            style="@style/Widget.AppCompat.Button.Borderless" />
     </LinearLayout>
+
+    <Spinner
+        android:id="@+id/SearchItemTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </Spinner>
 
 
 </LinearLayout>

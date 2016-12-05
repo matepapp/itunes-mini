@@ -9,26 +9,44 @@
     android:paddingRight="16dp"
     android:paddingTop="8dp">
 
-    <TextView
-        android:id="@+id/ExpressionItemNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        tools:text="Usher" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/SearchItemExpressionTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Usher" />
+
+        <TextView
+            android:id="@+id/SearchItemTypeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Music" />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/ExpressionItemEditButton"
+        android:id="@+id/SearchItemEditButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_weight="1
+        "
         android:text="@string/edit"
         android:theme="@style/FlatButton"
         style="@style/Widget.AppCompat.Button.Borderless"
         />
 
     <Button
-        android:id="@+id/ExpressionItemDeleteButton"
+        android:id="@+id/SearchItemDeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_weight="1"
         android:text="@string/delete"
         android:theme="@style/FlatButton"
         style="@style/Widget.AppCompat.Button.Borderless"/>
