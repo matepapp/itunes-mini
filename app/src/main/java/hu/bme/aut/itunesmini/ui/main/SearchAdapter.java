@@ -59,6 +59,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         }
     }
 
+    public void update(List<SearchItem> searchItems) {
+        items.clear();
+        items.addAll(searchItems);
+        notifyDataSetChanged();
+    }
+
     public class SearchViewHolder extends RecyclerView.ViewHolder {
         int position;
         TextView expressionTextView;

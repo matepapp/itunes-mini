@@ -1,5 +1,6 @@
 package hu.bme.aut.itunesmini.ui.main;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import java.util.List;
 
 import hu.bme.aut.itunesmini.R;
 import hu.bme.aut.itunesmini.model.SearchItem;
@@ -28,6 +31,21 @@ public class MainActivity extends AppCompatActivity implements AddSearchItemDial
         initRecyclerView();
     }
 
+    private void loadItemsInBackground() {
+        new AsyncTask<Void, Void, List<SearchItem>>() {
+            @Override
+            protected List<SearchItem> doInBackground(Void... voids) {
+                return SearchItem.listAll(SearchItem.class);
+            }
+
+            @Override
+            protected void onPostExecute(List<SearchItem> searchItems) {
+                super.onPostExecute(searchItems);
+                adapter.update(searchItems);
+            }
+        }.execute();
+    }
+
     private void initFloatingActionButton() {
         FloatingActionButton fab =
                 (FloatingActionButton) findViewById(R.id.fab);
@@ -42,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements AddSearchItemDial
 
     private void initRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.MainRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new SearchAdapter(
                 new OnSearchItemSelectedListener() {
                     @Override
@@ -51,14 +68,9 @@ public class MainActivity extends AppCompatActivity implements AddSearchItemDial
                     }
                 });
 
-        SearchItem searchItem1 = new SearchItem("Macklemore", 25, SearchItem.Type.MUSIC);
-        SearchItem searchItem2 = new SearchItem("Punnany Massif", 50, SearchItem.Type.MUSIC);
-        SearchItem searchItem3 = new SearchItem("Facebook", 25, SearchItem.Type.SOFTWARE);
-
-        adapter.addSearchItem(searchItem1);
-        adapter.addSearchItem(searchItem2);
-        adapter.addSearchItem(searchItem3);
+        loadItemsInBackground();
         recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override

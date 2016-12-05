@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="type_items">
+        <item>All</item>
+        <item>Audiobook</item>
+        <item>Ebook</item>
         <item>Movie</item>
-        <item>Podcast</item>
         <item>Music</item>
         <item>Music Video</item>
-        <item>Audiobook</item>
+        <item>Podcast</item>
         <item>Shortfilm</item>
-        <item>TV Show</item>
         <item>Software</item>
-        <item>Ebook</item>
-        <item>All</item>
+        <item>TV Show</item>
     </string-array>
 </resources>

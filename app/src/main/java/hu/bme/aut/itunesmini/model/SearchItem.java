@@ -52,34 +52,4 @@ public class SearchItem extends SugarRecord {
     public String expression;
     public Integer resultCount;
     public Type type;
-
-    public SearchItem(String expression, Integer resultCount, Type type) {
-        this.expression = expression;
-        this.resultCount = resultCount;
-        this.type = type;
-    }
-
-    public String getExpression() {
-        return expression;
-    }
-
-    public void setExpression(String expression) {
-        this.expression = expression;
-    }
-
-    public Integer getResultCount() {
-        return resultCount;
-    }
-
-    public void setResultCount(Integer resultCount) {
-        this.resultCount = resultCount;
-    }
-
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
 }

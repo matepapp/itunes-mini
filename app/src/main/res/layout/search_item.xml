@@ -7,19 +7,22 @@
     android:paddingBottom="8dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="8dp">
+    android:paddingTop="16dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dip"
         android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="8dip"
         android:layout_gravity="left"
-        android:layout_weight="2"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/SearchItemExpressionTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16sp"
             tools:text="Usher" />
 
         <TextView
@@ -33,9 +36,6 @@
         android:id="@+id/SearchItemEditButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_weight="1
-        "
         android:text="@string/edit"
         android:theme="@style/FlatButton"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -45,8 +45,6 @@
         android:id="@+id/SearchItemDeleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_weight="1"
         android:text="@string/delete"
         android:theme="@style/FlatButton"
         style="@style/Widget.AppCompat.Button.Borderless"/>

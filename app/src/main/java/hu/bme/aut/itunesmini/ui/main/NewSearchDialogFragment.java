@@ -50,15 +50,7 @@ public class NewSearchDialogFragment extends AppCompatDialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                String expression = expressionEditText.getText().toString();
-                                Integer resultCount =
-                                        Integer.parseInt(resultCountEditText.getText().toString());
-                                String typeString = typeSpinner.getSelectedItem().toString();
-                                SearchItem.Type type = SearchItem.Type.typeOf(typeString);
-
-                                SearchItem searchItem = new SearchItem(expression, resultCount, type);
-
-                                listener.onSearchItemAdded(searchItem);
+                                listener.onSearchItemAdded(getSearchItem());
                             }
                         })
                 .setNegativeButton(R.string.back, null).create();
@@ -95,5 +87,21 @@ public class NewSearchDialogFragment extends AppCompatDialogFragment {
         );
 
         return view;
+    }
+
+    private SearchItem getSearchItem() {
+        SearchItem searchItem = new SearchItem();
+        searchItem.expression = expressionEditText.getText().toString();
+        searchItem.type = SearchItem.Type.typeOf(typeSpinner.getSelectedItem().toString());
+
+        try {
+            searchItem.resultCount = Integer.parseInt(resultCountEditText.getText().toString());
+        } catch (NumberFormatException e) {
+            searchItem.resultCount = 0;
+        }
+
+        searchItem.save();
+
+        return searchItem;
     }
 }
