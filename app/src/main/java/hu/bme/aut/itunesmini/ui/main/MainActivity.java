@@ -13,7 +13,7 @@ import android.view.MenuItem;
 
 import hu.bme.aut.itunesmini.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddExpressionDialogListener {
     private RecyclerView recyclerView;
     private ExpressionAdapter adapter;
 
@@ -21,17 +21,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initFab();
+        initFloatingActionButton();
         initRecyclerView();
     }
 
-    private void initFab() {
+    private void initFloatingActionButton() {
         FloatingActionButton fab =
                 (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: new search dialog
+                new NewSearchDialogFragment().show(
+                        getSupportFragmentManager(), NewSearchDialogFragment.TAG);
             }
         });
     }
@@ -52,5 +53,10 @@ public class MainActivity extends AppCompatActivity {
         adapter.addExpression("Interstellar");
         adapter.addExpression("Game of Thrones");
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onExpressionAdded(String expression) {
+        adapter.addExpression(expression);
     }
 }

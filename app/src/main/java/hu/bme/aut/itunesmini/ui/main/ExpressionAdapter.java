@@ -44,8 +44,8 @@ public class ExpressionAdapter extends RecyclerView.Adapter<ExpressionAdapter.Ex
         return expressions.size();
     }
 
-    public void addExpression(String newCity) {
-        expressions.add(newCity);
+    public void addExpression(String newExpression) {
+        expressions.add(newExpression);
         notifyItemInserted(expressions.size() - 1);
     }
 
