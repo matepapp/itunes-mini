@@ -50,7 +50,7 @@ public class NewSearchDialogFragment extends AppCompatDialogFragment {
 
     private View getContentView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_new_search, null);
-        editText = (EditText) view.findViewById(R.id.NewSearchDialogEditText);
+        editText = (EditText) view.findViewById(R.id.ExpressionEditText);
         return view;
     }
 }
