@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import hu.bme.aut.itunesmini.R;
@@ -20,7 +21,10 @@ import hu.bme.aut.itunesmini.R;
 public class NewSearchDialogFragment extends AppCompatDialogFragment {
     public static final String TAG = "NewSearchDialogFragment";
     private AddExpressionDialogListener listener;
-    private EditText editText;
+    private EditText expressionEditText;
+    private EditText resultCountEditText;
+    private Button plusButton;
+    private Button minusButton;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +46,7 @@ public class NewSearchDialogFragment extends AppCompatDialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                listener.onExpressionAdded(editText.getText().toString());
+                                listener.onExpressionAdded(expressionEditText.getText().toString());
                             }
                         })
                 .setNegativeButton(R.string.back, null).create();
@@ -50,7 +54,29 @@ public class NewSearchDialogFragment extends AppCompatDialogFragment {
 
     private View getContentView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_new_search, null);
-        editText = (EditText) view.findViewById(R.id.ExpressionEditText);
+        expressionEditText = (EditText) view.findViewById(R.id.ExpressionEditText);
+        resultCountEditText = (EditText) view.findViewById(R.id.ResultsCountEditText);
+        plusButton = (Button) view.findViewById(R.id.Plus);
+        minusButton = (Button) view.findViewById(R.id.Minus);
+
+        plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer result = Integer.parseInt(resultCountEditText.getText().toString());
+                result++;
+                resultCountEditText.setText(result.toString());
+            }
+        });
+
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer result = Integer.parseInt(resultCountEditText.getText().toString());
+                result--;
+                resultCountEditText.setText(result.toString());
+            }
+        });
+
         return view;
     }
 }
