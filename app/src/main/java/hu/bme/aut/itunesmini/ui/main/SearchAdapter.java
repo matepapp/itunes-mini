@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import hu.bme.aut.itunesmini.R;
@@ -18,10 +19,13 @@ import hu.bme.aut.itunesmini.model.SearchItem;
  */
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchViewHolder> {
     private final List<SearchItem> items;
-    private OnSearchItemSelectedListener listener;
+    private OnSearchItemSelectedListener itemSelectedListener;
+    private SearchItemEditedListener itemEditedListener;
 
-    public SearchAdapter(OnSearchItemSelectedListener listener) {
-        this.listener = listener;
+    public SearchAdapter(OnSearchItemSelectedListener itemSelectedListener,
+                         SearchItemEditedListener itemEditedListener) {
+        this.itemSelectedListener = itemSelectedListener;
+        this.itemEditedListener = itemEditedListener;
         items = new ArrayList<>();
     }
 
@@ -50,7 +54,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if (itemEditedListener != null) {
+                    itemEditedListener.onSearchItemEdited(items.get(position));
+                }
             }
         });
     }
@@ -71,6 +77,21 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         notifyItemRemoved(position);
         if (position < items.size()) {
             notifyItemRangeChanged(position, items.size() - position);
+        }
+    }
+
+    public void removeSearchItem(SearchItem searchItem) {
+        for(int i = 0; i < items.size(); i++) {
+            SearchItem item = items.get(i);
+            if(item.equals(searchItem)) {
+                items.remove(item);
+                item.delete();
+                notifyItemRemoved(i);
+
+                if (i < items.size()) {
+                    notifyItemRangeChanged(i, items.size() - i);
+                }
+            }
         }
     }
 
@@ -95,11 +116,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
                             R.id.SearchItemTypeTextView);
             deleteButton = (Button) itemView.findViewById(R.id.SearchItemDeleteButton);
             editButton = (Button) itemView.findViewById(R.id.SearchItemEditButton);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (listener != null) {
-                        listener.onSearchItemSelected(items.get(position));
+                    if (itemSelectedListener != null) {
+                        itemSelectedListener.onSearchItemSelected(items.get(position));
                     }
                 }
             });

@@ -31,10 +31,34 @@ public class NewSearchDialogFragment extends AppCompatDialogFragment {
     private Button plusButton;
     private Button minusButton;
     private Spinner typeSpinner;
+    String expression = "";
+    String type = "";
+    Integer count = 20;
+
+    static NewSearchDialogFragment newInstance(String expression, String type, Integer count) {
+        NewSearchDialogFragment fragment = new NewSearchDialogFragment();
+
+        // Supply num input as an argument.
+        Bundle bundle = new Bundle();
+        bundle.putString("expression", expression);
+        bundle.putString("type", type);
+        bundle.putInt("count", count);
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            expression = bundle.getString("expression");
+            type = bundle.getString("type");
+            count = bundle.getInt("count");
+        }
+
         if (getActivity() instanceof AddSearchItemDialogListener) {
             listener = (AddSearchItemDialogListener) getActivity();
         } else {
@@ -73,7 +97,9 @@ public class NewSearchDialogFragment extends AppCompatDialogFragment {
     private View getContentView() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_new_search, null);
         expressionEditText = (EditText) view.findViewById(R.id.ExpressionEditText);
+        expressionEditText.setText(expression);
         resultCountEditText = (EditText) view.findViewById(R.id.ResultsCountEditText);
+        resultCountEditText.setText(count.toString());
         plusButton = (Button) view.findViewById(R.id.Plus);
         minusButton = (Button) view.findViewById(R.id.Minus);
         plusButton.setOnClickListener(new View.OnClickListener() {

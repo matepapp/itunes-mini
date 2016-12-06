@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -72,6 +73,18 @@ public class MainActivity extends AppCompatActivity implements AddSearchItemDial
                         showResultsIntent.putExtra(ResultActivity.MEDIA, searchItem.type);
                         showResultsIntent.putExtra(ResultActivity.LIMIT, searchItem.resultCount);
                         startActivity(showResultsIntent);
+                    }
+                },
+                new SearchItemEditedListener() {
+                    @Override
+                     public void onSearchItemEdited(SearchItem searchItem) {
+                        DialogFragment newSearchDialogFragment = NewSearchDialogFragment.newInstance(
+                                searchItem.expression,
+                                searchItem.type.toString(),
+                                searchItem.resultCount
+                        );
+                        newSearchDialogFragment.show(
+                                getSupportFragmentManager(), NewSearchDialogFragment.TAG);
                     }
                 });
 
