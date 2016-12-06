@@ -34,6 +34,8 @@
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="hu.bme.aut.itunesmini" />
+
+        <activity android:name=".ui.result.ResultActivity"></activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package hu.bme.aut.itunesmini.ui.main;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import hu.bme.aut.itunesmini.R;
 import hu.bme.aut.itunesmini.model.SearchItem;
+import hu.bme.aut.itunesmini.ui.result.ResultActivity;
 
 public class MainActivity extends AppCompatActivity implements AddSearchItemDialogListener {
     private RecyclerView recyclerView;
@@ -64,7 +66,10 @@ public class MainActivity extends AppCompatActivity implements AddSearchItemDial
                 new OnSearchItemSelectedListener() {
                     @Override
                     public void onSearchItemSelected(SearchItem searchItem) {
-                        // Todo: ResultActivity
+                        Intent showResultsIntent = new Intent();
+                        showResultsIntent.setClass(MainActivity.this, ResultActivity.class);
+                        showResultsIntent.putExtra(ResultActivity.SEARCH, searchItem);
+                        startActivity(showResultsIntent);
                     }
                 });
 

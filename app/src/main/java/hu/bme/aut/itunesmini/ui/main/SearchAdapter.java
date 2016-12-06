@@ -39,10 +39,18 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
         holder.position = position;
         holder.expressionTextView.setText(items.get(position).expression);
         holder.typeTextView.setText(items.get(position).type.toString());
+
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 removeSearchItem(position);
+            }
+        });
+
+        holder.editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

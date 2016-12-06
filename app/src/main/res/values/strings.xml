@@ -9,5 +9,5 @@
     <string name="results_count">Results count</string>
     <string name="search">Search</string>
     <string name="back">Back</string>
-    <string name="results">Results</string>
+    <string name="results">Results of %s</string>
 </resources>
