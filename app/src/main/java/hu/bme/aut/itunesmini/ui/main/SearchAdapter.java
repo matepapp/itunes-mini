@@ -35,10 +35,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     }
 
     @Override
-    public void onBindViewHolder(SearchViewHolder holder, int position) {
+    public void onBindViewHolder(SearchViewHolder holder, final int position) {
         holder.position = position;
         holder.expressionTextView.setText(items.get(position).expression);
         holder.typeTextView.setText(items.get(position).type.toString());
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeSearchItem(position);
+            }
+        });
     }
 
     @Override
@@ -52,7 +58,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     }
 
     public void removeSearchItem(int position) {
-        items.remove(position);
+        SearchItem removedItem = items.remove(position);
+        removedItem.delete();
         notifyItemRemoved(position);
         if (position < items.size()) {
             notifyItemRangeChanged(position, items.size() - position);
