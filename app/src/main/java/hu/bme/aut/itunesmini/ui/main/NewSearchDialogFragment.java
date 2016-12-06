@@ -2,6 +2,7 @@ package hu.bme.aut.itunesmini.ui.main;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.widget.Spinner;
 
 import hu.bme.aut.itunesmini.R;
 import hu.bme.aut.itunesmini.model.SearchItem;
+import hu.bme.aut.itunesmini.ui.result.ResultActivity;
 
 /**
  * Created by matepapp on 2016. 12. 05..
@@ -50,7 +52,19 @@ public class NewSearchDialogFragment extends AppCompatDialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                listener.onSearchItemAdded(getSearchItem());
+                                SearchItem searchItem = getSearchItem();
+                                listener.onSearchItemAdded(searchItem);
+
+                                Intent showResultsIntent = new Intent();
+                                showResultsIntent.setClass(
+                                        getActivity().getBaseContext(), ResultActivity.class);
+                                showResultsIntent.putExtra(
+                                        ResultActivity.QUERY, searchItem.expression);
+                                showResultsIntent.putExtra(
+                                        ResultActivity.MEDIA, searchItem.type);
+                                showResultsIntent.putExtra(
+                                        ResultActivity.LIMIT, searchItem.resultCount);
+                                startActivity(showResultsIntent);
                             }
                         })
                 .setNegativeButton(R.string.back, null).create();
