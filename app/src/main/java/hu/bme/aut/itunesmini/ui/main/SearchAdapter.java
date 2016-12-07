@@ -67,9 +67,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     }
 
     public void addSearchItem(SearchItem newSearchItem) {
-        items.add(newSearchItem);
-        notifyItemInserted(items.size() - 1);
+        items.add(0, newSearchItem);
+//        notifyItemInserted(items.size() - 1);
+        notifyDataSetChanged();
+
     }
+
 
     public void removeSearchItem(int position) {
         SearchItem removedItem = items.remove(position);
