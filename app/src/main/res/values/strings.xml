@@ -10,4 +10,5 @@
     <string name="search">Search</string>
     <string name="back">Back</string>
     <string name="results">Results of %s</string>
+    <string name="search_history">Search history</string>
 </resources>

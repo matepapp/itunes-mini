@@ -85,7 +85,7 @@ public class NewSearchDialogFragment extends AppCompatDialogFragment {
                                 showResultsIntent.putExtra(
                                         ResultActivity.QUERY, searchItem.expression);
                                 showResultsIntent.putExtra(
-                                        ResultActivity.MEDIA, searchItem.type);
+                                        ResultActivity.MEDIA, searchItem.type.name());
                                 showResultsIntent.putExtra(
                                         ResultActivity.LIMIT, searchItem.resultCount);
                                 startActivity(showResultsIntent);
@@ -125,6 +125,7 @@ public class NewSearchDialogFragment extends AppCompatDialogFragment {
                 android.R.layout.simple_spinner_dropdown_item,
                 getResources().getStringArray(R.array.type_items))
         );
+        typeSpinner.setSelection(SearchItem.Type.indexOf(type));
 
         return view;
     }
@@ -132,7 +133,7 @@ public class NewSearchDialogFragment extends AppCompatDialogFragment {
     private SearchItem getSearchItem() {
         SearchItem searchItem = new SearchItem();
         searchItem.expression = expressionEditText.getText().toString();
-        searchItem.type = SearchItem.Type.typeOf(typeSpinner.getSelectedItem().toString());
+        searchItem.type = SearchItem.Type.getByOrdinal(typeSpinner.getSelectedItemPosition());
 
         try {
             searchItem.resultCount = Integer.parseInt(resultCountEditText.getText().toString());

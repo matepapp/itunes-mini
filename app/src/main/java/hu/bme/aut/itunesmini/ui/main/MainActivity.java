@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements AddSearchItemDial
                         Intent showResultsIntent = new Intent();
                         showResultsIntent.setClass(MainActivity.this, ResultActivity.class);
                         showResultsIntent.putExtra(ResultActivity.QUERY, searchItem.expression);
-                        showResultsIntent.putExtra(ResultActivity.MEDIA, searchItem.type);
+                        showResultsIntent.putExtra(ResultActivity.MEDIA, searchItem.type.name());
                         showResultsIntent.putExtra(ResultActivity.LIMIT, searchItem.resultCount);
                         startActivity(showResultsIntent);
                     }

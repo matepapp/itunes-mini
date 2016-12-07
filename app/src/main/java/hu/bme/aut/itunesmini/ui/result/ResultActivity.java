@@ -14,7 +14,7 @@ public class ResultActivity extends AppCompatActivity {
     public static final String LIMIT = "limit_key";
     private String query;
     private String media;
-    private String limit;
+    private Integer limit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,8 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         query = getIntent().getStringExtra(QUERY);
+        media = getIntent().getStringExtra(MEDIA);
+        limit = getIntent().getIntExtra(LIMIT, 0);
 
         getSupportActionBar().setTitle(getString(R.string.results, query));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

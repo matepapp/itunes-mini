@@ -35,7 +35,6 @@
                 android:inputType="numberDecimal"
                 android:maxLength="2"
                 android:ems="10"
-                android:text="20"
                 android:hint="@string/results_count"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -66,7 +65,6 @@
         android:id="@+id/SearchItemTypeSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </Spinner>
 
 

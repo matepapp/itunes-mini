@@ -8,16 +8,16 @@ import com.orm.SugarRecord;
 
 public class SearchItem extends SugarRecord {
     public enum Type {
-        MOVIE("Movie"),
-        PODCAST("Podcast"),
-        MUSIC("Music"),
-        MUSICVIDEO("Music Video"),
-        AUDIOBOOK("Audiobook"),
-        SHORTFILM("Shortfilm"),
-        TVSHOW("TV Show"),
-        SOFTWARE("Software"),
-        EBOOK("Ebook"),
-        ALL("All");
+        all("All"),
+        audiobook("Audiobook"),
+        ebook("Ebook"),
+        movie("Movie"),
+        music("Music"),
+        musicVideo("Music Video"),
+        podcast("Podcast"),
+        shortFilm("Shortfilm"),
+        software("Software"),
+        tvShow("TV Show");
 
         private final String text;
 
@@ -29,23 +29,22 @@ public class SearchItem extends SugarRecord {
             return text;
         }
 
-        public static Type typeOf(String string) {
+        public static int indexOf(String string) {
             for (Type type: Type.values())
                 if (string.equals(type.toString()))
-                    return type;
-
-            return Type.ALL;
+                    return type.ordinal();
+            return 0;
         }
 
         public static Type getByOrdinal(int ordinal) {
-            Type ret = null;
-            for (Type cat : Type.values()) {
-                if (cat.ordinal() == ordinal) {
-                    ret = cat;
+            Type result = null;
+            for (Type type : Type.values()) {
+                if (type.ordinal() == ordinal) {
+                    result = type;
                     break;
                 }
             }
-            return ret;
+            return result;
         }
     }
 
