@@ -15,7 +15,6 @@ public class SearchItem extends SugarRecord {
         music("Music"),
         musicVideo("Music Video"),
         podcast("Podcast"),
-        shortFilm("Shortfilm"),
         software("Software"),
         tvShow("TV Show");
 
