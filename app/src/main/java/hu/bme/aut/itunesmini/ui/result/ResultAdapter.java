@@ -52,14 +52,14 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
     @Override
     public void onBindViewHolder(final ResultViewHolder holder, int position) {
         Result result = results.get(position);
-        holder.title.setText(result.getArtistName());
+        holder.subtitle.setText(result.getArtistName());
         if(!result.getTrackName().equals("")) {
-           holder.subtitle.setText(result.getTrackName());
+           holder.title.setText(result.getTrackName());
         } else if(!result.getCollectionName().equals("")) {
-            holder.subtitle.setText(result.getCollectionName());
+            holder.title.setText(result.getCollectionName());
         }
 
-        Glide.with(context).load(result.getArtworkUrl60()).crossFade().into(holder.artwork);
+        Glide.with(context).load(result.getArtworkUrl100()).crossFade().into(holder.artwork);
     }
 
     @Override

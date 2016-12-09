@@ -13,16 +13,16 @@ public class Result {
     @SerializedName("trackName")
     public String trackName;
 
-    @SerializedName("artworkUrl60")
-    public String artworkUrl60;
+    @SerializedName("artworkUrl100")
+    public String artworkUrl100;
 
     @SerializedName("collectionName")
     public String collectionName;
 
-    public Result(String artistName, String trackName, String artworkUrl60, String collectionName) {
+    public Result(String artistName, String trackName, String artworkUrl100, String collectionName) {
         this.artistName = artistName;
         this.trackName = trackName;
-        this.artworkUrl60 = artworkUrl60;
+        this.artworkUrl100 = artworkUrl100;
         this.collectionName = collectionName;
     }
 
@@ -42,12 +42,12 @@ public class Result {
         this.trackName = trackName;
     }
 
-    public String getArtworkUrl60() {
-        return artworkUrl60;
+    public String getArtworkUrl100() {
+        return artworkUrl100;
     }
 
-    public void setArtworkUrl60(String artworkUrl60) {
-        this.artworkUrl60 = artworkUrl60;
+    public void setArtworkUrl100(String artworkUrl1000) {
+        this.artworkUrl100 = artworkUrl1000;
     }
 
     public String getCollectionName() {
