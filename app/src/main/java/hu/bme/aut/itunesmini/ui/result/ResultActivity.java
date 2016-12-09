@@ -70,17 +70,17 @@ public class ResultActivity extends AppCompatActivity implements ResultDataHolde
     @Override
     protected void onResume() {
         super.onResume();
-        loadWeatherData();
+        loadData();
     }
 
-    private void loadWeatherData() {
+    private void loadData() {
         Call<ResultData> call = NetworkManager.getInstance().getResult(query, media, limit.toString());
         call.enqueue(new Callback<ResultData>() {
             @Override
             public void onResponse(Call<ResultData> call, Response<ResultData> response) {
                 Log.d(TAG, "onResponse: " + response.code());
                 if (response.isSuccessful()) {
-                    displayWeatherData(response.body());
+                    displayData(response.body());
                 } else {
                     Toast.makeText(ResultActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
                 }
@@ -96,7 +96,7 @@ public class ResultActivity extends AppCompatActivity implements ResultDataHolde
         });
     }
 
-    private void displayWeatherData(ResultData result) {
+    private void displayData(ResultData result) {
         resultData = result;
         recyclerView = (RecyclerView) findViewById(R.id.result_recycler_view);
         adapter = new ResultAdapter(this, resultData.getResults(), new OnResultCardSelectedListener() {

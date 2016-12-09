@@ -40,9 +40,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
 
     @Override
     public void onBindViewHolder(SearchViewHolder holder, final int position) {
+        Collections.reverse(items);
         holder.position = position;
         holder.expressionTextView.setText(items.get(position).expression);
         holder.typeTextView.setText(items.get(position).type.toString());
+        Collections.reverse(items);
 
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +57,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
             @Override
             public void onClick(View v) {
                 if (itemEditedListener != null) {
+                    Collections.reverse(items);
                     itemEditedListener.onSearchItemEdited(items.get(position));
+                    Collections.reverse(items);
                 }
             }
         });
@@ -67,35 +71,20 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
     }
 
     public void addSearchItem(SearchItem newSearchItem) {
-        items.add(0, newSearchItem);
-//        notifyItemInserted(items.size() - 1);
+        items.add(newSearchItem);
         notifyDataSetChanged();
-
     }
 
 
     public void removeSearchItem(int position) {
+        Collections.reverse(items);
         SearchItem removedItem = items.remove(position);
         removedItem.delete();
         notifyItemRemoved(position);
         if (position < items.size()) {
             notifyItemRangeChanged(position, items.size() - position);
         }
-    }
-
-    public void removeSearchItem(SearchItem searchItem) {
-        for(int i = 0; i < items.size(); i++) {
-            SearchItem item = items.get(i);
-            if(item.equals(searchItem)) {
-                items.remove(item);
-                item.delete();
-                notifyItemRemoved(i);
-
-                if (i < items.size()) {
-                    notifyItemRangeChanged(i, items.size() - i);
-                }
-            }
-        }
+        Collections.reverse(items);
     }
 
     public void update(List<SearchItem> searchItems) {
@@ -124,7 +113,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchView
                 @Override
                 public void onClick(View view) {
                     if (itemSelectedListener != null) {
+                        Collections.reverse(items);
                         itemSelectedListener.onSearchItemSelected(items.get(position));
+                        Collections.reverse(items);
                     }
                 }
             });
