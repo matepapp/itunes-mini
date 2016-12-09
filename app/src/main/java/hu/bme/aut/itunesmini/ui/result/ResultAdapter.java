@@ -1,6 +1,8 @@
 package hu.bme.aut.itunesmini.ui.result;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +24,10 @@ import hu.bme.aut.itunesmini.model.Result;
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultViewHolder> {
     private Context context;
     private List<Result> results;
+    private OnResultCardSelectedListener listener;
 
     public class ResultViewHolder extends RecyclerView.ViewHolder {
+        int position;
         public TextView title;
         public TextView subtitle;
         public ImageView artwork;
@@ -33,12 +37,21 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
             title = (TextView) view.findViewById(R.id.title);
             subtitle = (TextView) view.findViewById(R.id.subtitle);
             artwork = (ImageView) view.findViewById(R.id.artwork);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null)
+                        listener.onResultCardSelected(results.get(position));
+                }
+            });
         }
     }
 
-    public ResultAdapter(Context context, List<Result> results) {
+    public ResultAdapter(Context context, List<Result> results, OnResultCardSelectedListener listener) {
         this.context = context;
         this.results = results;
+        this.listener = listener;
     }
 
     @Override
@@ -51,6 +64,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
 
     @Override
     public void onBindViewHolder(final ResultViewHolder holder, int position) {
+        holder.position = position;
         Result result = results.get(position);
         holder.subtitle.setText(result.getArtistName());
         if(!result.getTrackName().equals("")) {

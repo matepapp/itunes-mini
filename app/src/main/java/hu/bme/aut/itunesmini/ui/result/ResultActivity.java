@@ -1,5 +1,7 @@
 package hu.bme.aut.itunesmini.ui.result;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -97,7 +99,14 @@ public class ResultActivity extends AppCompatActivity implements ResultDataHolde
     private void displayWeatherData(ResultData result) {
         resultData = result;
         recyclerView = (RecyclerView) findViewById(R.id.result_recycler_view);
-        adapter = new ResultAdapter(this, resultData.getResults());
+        adapter = new ResultAdapter(this, resultData.getResults(), new OnResultCardSelectedListener() {
+            @Override
+            public void onResultCardSelected(Result result) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(result.getTrackViewUrl()));
+                startActivity(intent);
+            }
+        });
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(mLayoutManager);
