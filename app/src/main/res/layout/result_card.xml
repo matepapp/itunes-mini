@@ -17,7 +17,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/thumbnail"
+                android:id="@+id/artwork"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/cover_height"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -28,14 +28,14 @@
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/thumbnail"
+                android:layout_below="@id/artwork"
                 android:paddingLeft="@dimen/title_padding"
                 android:paddingRight="@dimen/title_padding"
                 android:paddingTop="@dimen/title_padding"
                 android:textSize="@dimen/title" />
 
             <TextView
-                android:id="@+id/count"
+                android:id="@+id/subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title"

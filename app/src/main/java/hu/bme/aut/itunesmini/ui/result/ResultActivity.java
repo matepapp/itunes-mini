@@ -2,9 +2,15 @@ package hu.bme.aut.itunesmini.ui.result;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -27,7 +33,10 @@ public class ResultActivity extends AppCompatActivity implements ResultDataHolde
     private String query;
     private String media;
     private Integer limit;
+
     public ResultData resultData;
+    private RecyclerView recyclerView;
+    private ResultAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +49,6 @@ public class ResultActivity extends AppCompatActivity implements ResultDataHolde
 
         getSupportActionBar().setTitle(getString(R.string.results, query));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Call<ResultData> call = NetworkManager.getInstance().getResult(query, media, limit.toString());
-        call.enqueue(new Callback<ResultData>() {
-            @Override
-            public void onResponse(Call<ResultData> call, Response<ResultData> response) {
-                List<Result> results = response.body().results;
-                Integer resultCount = response.body().resultCount;
-                Log.d(TAG, "Number of results received: " + resultCount);
-            }
-
-            @Override
-            public void onFailure(Call<ResultData>call, Throwable t) {
-                Log.e(TAG, t.toString());
-            }
-        });
     }
 
     @Override
@@ -69,5 +63,45 @@ public class ResultActivity extends AppCompatActivity implements ResultDataHolde
     @Override
     public ResultData getResultData() {
         return resultData;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadWeatherData();
+    }
+
+    private void loadWeatherData() {
+        Call<ResultData> call = NetworkManager.getInstance().getResult(query, media, limit.toString());
+        call.enqueue(new Callback<ResultData>() {
+            @Override
+            public void onResponse(Call<ResultData> call, Response<ResultData> response) {
+                Log.d(TAG, "onResponse: " + response.code());
+                if (response.isSuccessful()) {
+                    displayWeatherData(response.body());
+                } else {
+                    Toast.makeText(ResultActivity.this, "Error: " + response.message(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResultData> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(ResultActivity.this,
+                        "Error in network request, check LOG",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void displayWeatherData(ResultData result) {
+        resultData = result;
+        recyclerView = (RecyclerView) findViewById(R.id.result_recycler_view);
+        adapter = new ResultAdapter(this, resultData.getResults());
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
     }
 }
